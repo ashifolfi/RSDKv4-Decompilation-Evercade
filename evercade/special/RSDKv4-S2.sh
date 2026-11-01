@@ -32,9 +32,9 @@ aplay -D plughw:0,1 /dev/null && export ALSA_PCM_DEVICE=1
 set_perf
 
 env \
-    LD_LIBRARY_PATH="${SDCARD}/RSDKv4-S2" \
-    HOME="${SDCARD}/RSDKv4-S2" \
-    /lib/ld-linux-armhf.so.3 ${SDCARD}/RSDKv4-S2/RSDKv4 \
-    gamedir="${SDCARD}/RSDKv4-S2"
+    LD_LIBRARY_PATH="${SDCARD}/RSDKv4" \
+    HOME="${SDCARD}/RSDKv4/S2" \
+    /lib/ld-linux-armhf.so.3 ${SDCARD}/RSDKv4/RSDKv4 \
+    gamedir="${SDCARD}/RSDKv4/S2"
 
 unset_perf
