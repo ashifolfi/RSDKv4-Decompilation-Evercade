@@ -11,6 +11,17 @@ void parseArguments(int argc, char *argv[])
     for (int a = 0; a < argc; ++a) {
         const char *find = "";
 
+#if RETRO_PLATFORM == RETRO_EVERCADE
+        find = strstr(argv[a], "gamedir=");
+        if (find)
+        {
+            int b = 0;
+            int c = 8;
+            while (find[c] && find[c] != ';') Engine.gameDir[b++] = find[c++];
+            Engine.gameDir[b] = 0;
+        }
+#endif
+
         find = strstr(argv[a], "stage=");
         if (find) {
             int b = 0;

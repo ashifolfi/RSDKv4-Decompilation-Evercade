@@ -183,7 +183,7 @@ bool LoadFile(const char *filePath, FileInfo *fileInfo)
     }
 #endif
 
-#if RETRO_PLATFORM == RETRO_OSX || RETRO_PLATFORM == RETRO_ANDROID
+#if RETRO_PLATFORM == RETRO_OSX || RETRO_PLATFORM == RETRO_ANDROID || RETRO_PLATFORM == RETRO_EVERCADE
 #if RETRO_USE_MOD_LOADER
     if (addPath) {
 #else

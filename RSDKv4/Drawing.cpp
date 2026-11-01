@@ -70,7 +70,7 @@ int InitRenderDevice()
     flags |= SDL_WINDOW_OPENGL;
 
 #if RETRO_PLATFORM != RETRO_OSX // dude idk either you just gotta trust that this works
-#if RETRO_PLATFORM != RETRO_ANDROID
+#if RETRO_PLATFORM != RETRO_ANDROID && RETRO_PLATFORM != RETRO_EVERCADE
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 #else
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
@@ -202,7 +202,7 @@ int InitRenderDevice()
 
     SDL_GL_SetSwapInterval(Engine.vsync ? 1 : 0);
 
-#if RETRO_PLATFORM != RETRO_ANDROID && RETRO_PLATFORM != RETRO_OSX
+#if RETRO_PLATFORM != RETRO_ANDROID && RETRO_PLATFORM != RETRO_OSX && RETRO_PLATFORM != RETRO_EVERCADE
     GLenum err = glewInit();
     if (err != GLEW_OK && err != GLEW_ERROR_NO_GLX_DISPLAY) {
         PrintLog("glew init error:");
@@ -226,7 +226,9 @@ int InitRenderDevice()
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-#if RETRO_PLATFORM == RETRO_ANDROID
+    // TODO: implement proper evercade platform
+
+#if RETRO_PLATFORM == RETRO_ANDROID || RETRO_PLATFORM == RETRO_EVERCADE
     Engine.windowScale     = 1;
     displaySettings.width  = SCREEN_XSIZE;
     displaySettings.height = SCREEN_YSIZE;
@@ -257,12 +259,14 @@ int InitRenderDevice()
     glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
     glEnable(GL_LIGHT0);
 
-#if RETRO_PLATFORM == RETRO_ANDROID
+// TODO: Proper evercade platform
+#if RETRO_PLATFORM == RETRO_ANDROID || RETRO_PLATFORM == RETRO_EVERCADE
     Engine.startFullScreen = true;
 #endif
 #endif
 
-#if RETRO_PLATFORM != RETRO_ANDROID
+// TODO: proper evercade platform
+#if RETRO_PLATFORM != RETRO_ANDROID && RETRO_PLATFORM != RETRO_EVERCADE
     SetScreenDimensions(SCREEN_XSIZE_CONFIG * Engine.windowScale, SCREEN_YSIZE * Engine.windowScale);
 #else
     SetScreenDimensions(SCREEN_XSIZE, SCREEN_YSIZE);
@@ -950,7 +954,8 @@ void SetFullScreen(bool fs)
             h = mode.w;
         }
 
-#if RETRO_PLATFORM != RETRO_iOS && RETRO_PLATFORM != RETRO_ANDROID
+// TODO: Proper evercade platform
+#if 0// RETRO_PLATFORM != RETRO_iOS && RETRO_PLATFORM != RETRO_ANDROID
         float aspect            = SCREEN_XSIZE_CONFIG / (float)SCREEN_YSIZE;
         displaySettings.height  = h;
         displaySettings.width   = aspect * displaySettings.height;
