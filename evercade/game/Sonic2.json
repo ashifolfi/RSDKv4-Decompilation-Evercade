@@ -1,0 +1,24 @@
+{
+    "romFileName": "RSDKv4-S2",
+    "romCore": "UNKNOWN",
+    "romLaunchType": "NATIVE",
+    "romTitle": "Sonic 2",
+    "romPlatform": "Evercade",
+    "romGenre": "Platform",
+    "romReleaseDate": "2013",
+    "romPlayers": 1,
+    "romDescription": "The Retro Engine enhanced version of Sonic The Hedgehog 2! compiled for evercade and patched for improved performance where needed",
+    "romMapping": {
+        "a": "NULL",
+        "b": "NULL",
+        "x": "NULL",
+        "y": "NULL",
+        "dpad": "NULL",
+        "select": "NULL",
+        "start": "NULL",
+        "l1": "NULL",
+        "l2": "NULL",
+        "r1": "NULL",
+        "r2": "NULL"
+    }
+}
