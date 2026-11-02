@@ -35,6 +35,6 @@ env \
     LD_LIBRARY_PATH="${SDCARD}/RSDKv4" \
     HOME="${SDCARD}/RSDKv4/S2" \
     /lib/ld-linux-armhf.so.3 ${SDCARD}/RSDKv4/RSDKv4 \
-    gamedir="${SDCARD}/RSDKv4/S2"
+    gamedir=${SDCARD}/RSDKv4/S2
 
 unset_perf
