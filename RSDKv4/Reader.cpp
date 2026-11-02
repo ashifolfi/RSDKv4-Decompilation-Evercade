@@ -31,6 +31,8 @@ bool CheckRSDKFile(const char *filePath)
     char pathBuf[0x100];
     sprintf(pathBuf, "%s/%s", gamePath, filePath);
     sprintf(filePathBuffer, "%s", pathBuf);
+#elif RETRO_PLATFORM == RETRO_EVERCADE
+    sprintf(filePathBuffer, "%s%s", gamePath, filePath);
 #else
     sprintf(filePathBuffer, "%s", filePath);
 #endif
@@ -183,7 +185,7 @@ bool LoadFile(const char *filePath, FileInfo *fileInfo)
     }
 #endif
 
-#if RETRO_PLATFORM == RETRO_OSX || RETRO_PLATFORM == RETRO_ANDROID || RETRO_PLATFORM == RETRO_EVERCADE
+#if RETRO_PLATFORM == RETRO_OSX || RETRO_PLATFORM == RETRO_ANDROID
 #if RETRO_USE_MOD_LOADER
     if (addPath) {
 #else
@@ -191,6 +193,16 @@ bool LoadFile(const char *filePath, FileInfo *fileInfo)
 #endif
         char pathBuf[0x100];
         sprintf(pathBuf, "%s/%s", gamePath, filePathBuf);
+        sprintf(filePathBuf, "%s", pathBuf);
+    }
+#elif RETRO_PLATFORM == RETRO_EVERCADE
+#if RETRO_USE_MOD_LOADER
+    if (addPath) {
+#else
+    if (true) {
+#endif
+        char pathBuf[0x100];
+        sprintf(pathBuf, "%s%s", gamePath, filePathBuf);
         sprintf(filePathBuf, "%s", pathBuf);
     }
 #endif

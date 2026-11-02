@@ -56,8 +56,6 @@ bool ReadSaveRAMData()
     sprintf(buffer, "%s/%sSData.bin", redirectSave ? modsPath : gamePath, savePath);
 #elif RETRO_PLATFORM == RETRO_iOS
     sprintf(buffer, "%s/%sSData.bin", redirectSave ? modsPath : getDocumentsPath(), savePath);
-#elif RETRO_PLATFORM == RETRO_EVERCADE
-    sprintf(buffer, "%s/%sSData.bin", redirectSave ? modsPath : Engine.gameDir, savePath);
 #else
     sprintf(buffer, "%s%sSData.bin", redirectSave ? modsPath : gamePath, savePath);
 #endif
@@ -71,8 +69,6 @@ bool ReadSaveRAMData()
     sprintf(buffer, "%s/%sSData.bin", gamePath, savePath);
 #elif RETRO_PLATFORM == RETRO_iOS
     sprintf(buffer, "%s/%sSData.bin", getDocumentsPath(), savePath);
-#elif RETRO_PLATFORM == RETRO_EVERCADE
-    sprintf(buffer, "%s/%sSData.bin", Engine.gameDir, savePath);
 #else
     sprintf(buffer, "%s%sSData.bin", gamePath, savePath);
 #endif
@@ -90,8 +86,6 @@ bool ReadSaveRAMData()
         sprintf(buffer, "%s/%sSGame.bin", redirectSave ? modsPath : gamePath, savePath);
 #elif RETRO_PLATFORM == RETRO_iOS
         sprintf(buffer, "%s/%sSGame.bin", redirectSave ? modsPath : getDocumentsPath(), savePath);
-#elif RETRO_PLATFORM == RETRO_EVERCADE
-        sprintf(buffer, "%s/%sSGame.bin", redirectSave ? modsPath : Engine.gameDir, savePath);
 #else
         sprintf(buffer, "%s%sSGame.bin", redirectSave ? modsPath : gamePath, savePath);
 #endif
@@ -105,8 +99,6 @@ bool ReadSaveRAMData()
         sprintf(buffer, "%s/%sSGame.bin", gamePath, savePath);
 #elif RETRO_PLATFORM == RETRO_iOS
         sprintf(buffer, "%s/%sSGame.bin", getDocumentsPath(), savePath);
-#elif RETRO_PLATFORM == RETRO_EVERCADE
-        sprintf(buffer, "%s/%sSGame.bin", Engine.gameDir, savePath);
 #else
         sprintf(buffer, "%s%sSGame.bin", gamePath, savePath);
 #endif
@@ -138,7 +130,7 @@ bool WriteSaveRAMData()
 #elif RETRO_PLATFORM == RETRO_iOS
         sprintf(buffer, "%s/%sSData.bin", redirectSave ? modsPath : getDocumentsPath(), savePath);
 #elif RETRO_PLATFORM == RETRO_EVERCADE
-        sprintf(buffer, "%s/%sSData.bin", redirectSave ? modsPath : Engine.gameDir, savePath);
+        sprintf(buffer, "%s/%s/SData.bin", redirectSave ? modsPath : Engine.gameDir, savePath);
 #else
         sprintf(buffer, "%s%sSData.bin", redirectSave ? modsPath : gamePath, savePath);
 #endif
@@ -182,7 +174,7 @@ bool WriteSaveRAMData()
 #elif RETRO_PLATFORM == RETRO_iOS
         sprintf(buffer, "%s/%sSGame.bin", getDocumentsPath(), savePath);
 #elif RETRO_PLATFORM == RETRO_EVERCADE
-        sprintf(buffer, "%s/%sSGame.bin", Engine.gameDir, savePath);
+        sprintf(buffer, "%s/%s/SGame.bin", Engine.gameDir, savePath);
 #else
         sprintf(buffer, "%s%sSGame.bin", gamePath, savePath);
 #endif
@@ -201,14 +193,18 @@ void InitUserdata()
 {
     // userdata files are loaded from this directory
 #if RETRO_PLATFORM == RETRO_EVERCADE
-    sprintf(gamePath, "%s", Engine.gameDir);
+    sprintf(gamePath, "%s/", Engine.gameDir);
 #else
     sprintf(gamePath, "%s", BASE_PATH);
 #endif
 
 
 #if RETRO_USE_MOD_LOADER
+#if RETRO_PLATFORM == RETRO_EVERCADE
+    sprintf(modsPath, "%s", gamePath);
+#else
     sprintf(modsPath, "%s", BASE_PATH);
+#endif
 #endif
 
 #if RETRO_PLATFORM == RETRO_OSX
@@ -244,8 +240,10 @@ void InitUserdata()
         sprintf(buffer, "%s/settings.ini", getResourcesPath());
     else
         sprintf(buffer, "%ssettings.ini", gamePath);
-#elif RETRO_PLATFORM == RETRO_OSX || RETRO_PLATFORM == RETRO_ANDROID || RETRO_PLATFORM == RETRO_EVERCADE
+#elif RETRO_PLATFORM == RETRO_OSX || RETRO_PLATFORM == RETRO_ANDROID
     sprintf(buffer, "%s/settings.ini", gamePath);
+#elif RETRO_PLATFORM == RETRO_EVERCADE
+    sprintf(buffer, "%ssettings.ini", gamePath);
 #else
     sprintf(buffer, BASE_PATH "settings.ini");
 #endif
@@ -631,8 +629,10 @@ void InitUserdata()
         sprintf(buffer, "%s/controllerdb.txt", getResourcesPath());
     else
         sprintf(buffer, "%scontrollerdb.txt", gamePath);
-#elif RETRO_PLATFORM == RETRO_OSX || RETRO_PLATFORM == RETRO_ANDROID || RETRO_PLATFORM == RETRO_EVERCADE
+#elif RETRO_PLATFORM == RETRO_OSX || RETRO_PLATFORM == RETRO_ANDROID
     sprintf(buffer, "%s/controllerdb.txt", gamePath);
+#elif RETRO_PLATFORM == RETRO_EVERCADE
+    sprintf(buffer, "%scontrollerdb.txt", gamePath);
 #else
     sprintf(buffer, BASE_PATH "controllerdb.txt");
 #endif
@@ -651,7 +651,7 @@ void InitUserdata()
         sprintf(buffer, "%s/UData.bin", getResourcesPath());
     else
         sprintf(buffer, "%sUData.bin", gamePath);
-#elif RETRO_PLATFORM == RETRO_OSX || RETRO_PLATFORM == RETRO_EVERCADE
+#elif RETRO_PLATFORM == RETRO_OSX
     sprintf(buffer, "%s/UData.bin", gamePath);
 #else
     sprintf(buffer, "%sUData.bin", gamePath);

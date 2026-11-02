@@ -311,6 +311,10 @@ void RetroEngine::Init()
     StrCopy(dest, gamePath);
     StrAdd(dest, Engine.dataFile[0]);
     disableFocusPause = 0; // focus pause is ALWAYS enabled.
+#elif RETRO_PLATFORM == RETRO_EVERCADE
+    StrCopy(dest, gamePath);
+    StrCopy(dest, "/");
+    StrAdd(dest, Engine.dataFile[0]);
 #else
 
     StrCopy(dest, BASE_PATH);
@@ -490,7 +494,7 @@ void RetroEngine::Init()
             sprintf(rootDir, "%s/", getResourcesPath());
         else
             sprintf(rootDir, "%s", "");
-#elif RETRO_PLATFORM == RETRO_OSX
+#elif RETRO_PLATFORM == RETRO_OSX || RETRO_PLATFORM == RETRO_EVERCADE
         sprintf(rootDir, "%s/", gamePath);
 #else
         sprintf(rootDir, "%s", "");
